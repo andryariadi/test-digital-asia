@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   title: "Artivo",
   description: "Artivo is a platform for sharing and discovering articles.",
   icons: {
-    icon: "/logo.png",
+    icon: "/icon.png",
   },
 };
 
@@ -27,7 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased b-rose-600`}>{children}</body>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#F5F5F5]`}>{children}</body>
     </html>
   );
 }
