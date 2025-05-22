@@ -10,9 +10,14 @@ import { motion } from "framer-motion";
 import { Loader, Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { login } from "@/lib/actions/auth.action";
+import toast from "react-hot-toast";
+import { toastStyle } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
   const [openPass, setOpenPass] = useState(false);
+  const router = useRouter();
 
   const {
     register,
@@ -24,6 +29,37 @@ const LoginForm = () => {
 
   const handleSubmitLogin: SubmitHandler<z.infer<typeof LoginFormValidation>> = async (data) => {
     console.log({ data }, "<---loginForm");
+
+    try {
+      const res = await login(data);
+
+      if (res.user) {
+        if (typeof window !== "undefined") {
+          localStorage.setItem("token", res.user.token);
+          localStorage.setItem("role", res.user.role);
+        }
+
+        toast.success(res.message, {
+          style: toastStyle,
+        });
+
+        router.push(res.user.role === "Admin" ? "/dashboard" : "/");
+      }
+
+      console.log(res, "<---loginForm2");
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error.message);
+        toast.error(error.message, {
+          style: toastStyle,
+        });
+      } else {
+        console.log("An unknown error occurred:", error);
+        toast.error("An unknown error occurred", {
+          style: toastStyle,
+        });
+      }
+    }
   };
   return (
     <form onSubmit={handleSubmit(handleSubmitLogin)} className="b-sky-500 w-full min-h-[35rem] flex items-center justify-center">

@@ -11,9 +11,14 @@ import { Loader, Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+import { toastStyle } from "@/lib/utils";
+import { singup } from "@/lib/actions/auth.action";
 
 const RegisterForm = () => {
   const [openPass, setOpenPass] = useState(false);
+  const router = useRouter();
 
   const {
     register,
@@ -26,6 +31,32 @@ const RegisterForm = () => {
 
   const handleSubmitLogin: SubmitHandler<z.infer<typeof RegisterFormValidation>> = async (data) => {
     console.log({ data }, "<---registerForm");
+
+    try {
+      const res = await singup(data);
+
+      if (res.user) {
+        toast.success(res.message, {
+          style: toastStyle,
+        });
+
+        router.push("/login");
+      }
+
+      console.log(res, "<---registerForm2");
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error.message);
+        toast.error(error.message, {
+          style: toastStyle,
+        });
+      } else {
+        console.log("An unknown error occurred:", error);
+        toast.error("An unknown error occurred", {
+          style: toastStyle,
+        });
+      }
+    }
   };
   return (
     <form onSubmit={handleSubmit(handleSubmitLogin)} className="b-sky-500 w-full min-h-[35rem] flex items-center justify-center">
@@ -73,8 +104,8 @@ const RegisterForm = () => {
                   <SelectContent>
                     <SelectGroup>
                       <SelectLabel>Role</SelectLabel>
-                      <SelectItem value="admin">Admin</SelectItem>
-                      <SelectItem value="user">User</SelectItem>
+                      <SelectItem value="Admin">Admin</SelectItem>
+                      <SelectItem value="User">User</SelectItem>
                     </SelectGroup>
                   </SelectContent>
                 </Select>
