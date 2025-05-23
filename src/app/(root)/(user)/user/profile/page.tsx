@@ -1,7 +1,80 @@
+import { getUser } from "@/lib/actions/auth.action";
+import Link from "next/link";
 import React from "react";
 
-const ProfilePage = () => {
-  return <main className="bg-fuchsia-600 min-h-screen pt-20">ProfilePage</main>;
+const ProfilePage = async () => {
+  const user = await getUser();
+
+  const firstLetter = user.username?.charAt(0).toUpperCase();
+
+  console.log({ user }, "<---ProfilePage");
+  return (
+    <main className="b-fuchsia-600 min-h-screen pt-3 flex items-center justify-center">
+      <div className="b-sky-700 space-y-5 w-full max-w-[400px] p-5 rounded-lg hover:shadow-lg trassation-all duration-300">
+        {/* Top */}
+        <div className="b-pink-600 space-y-5">
+          {/* Title */}
+          <div className="b-green-600 flex flex-col items-center justify-center gap-8">
+            <h1 className="text-xl font-bold text-center text-slate-900">User Profile</h1>
+
+            <div className="bg-blue-200 size-[68px] rounded-full flex items-center justify-center">
+              <span className="text-blue-900 text-[24px] font-semibold">{firstLetter}</span>
+            </div>
+          </div>
+
+          {/* User info */}
+          <div className="b-amber-600 space-y-5">
+            {/* Username */}
+            <div className="flex items-center justify-between p-2 rounded-md bg-slate-200">
+              {/* Key */}
+              <div className="b-amber-500 w-full max-w-28 flex items-center justify-between">
+                <h3 className="text-[16px] font-semibold text-slate-900">Username</h3>
+                <span>:</span>
+              </div>
+
+              {/* Value */}
+              <div className="b-emerald-500 w-full max-w-40 flex items-center">
+                <p className="text-slate-900 capitalize">{user.username}</p>
+              </div>
+            </div>
+
+            {/* Password */}
+            <div className="flex items-center justify-between p-2 rounded-md bg-slate-200">
+              {/* Key */}
+              <div className="b-amber-500 w-full max-w-28 flex items-center justify-between">
+                <h3 className="text-[16px] font-semibold text-slate-900">Password</h3>
+                <span>:</span>
+              </div>
+
+              {/* Value */}
+              <div className="b-emerald-500 w-full max-w-40 flex items-center">
+                <p className="text-slate-900 capitalize">{user.id}</p>
+              </div>
+            </div>
+
+            {/* Role */}
+            <div className="flex items-center justify-between p-2 rounded-md bg-slate-200">
+              {/* Key */}
+              <div className="b-amber-500 w-full max-w-28 flex items-center justify-between">
+                <h3 className="text-[16px] font-semibold text-slate-900">Role</h3>
+                <span>:</span>
+              </div>
+
+              {/* Value */}
+              <div className="b-emerald-500 w-full max-w-40 flex items-center">
+                <p className="text-slate-900 capitalize">{user.role}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom */}
+        <button className="py-3 px-4 mt-3 w-full bg-gradient-to-r from-blue-500 to-sky-600 text-white font-bold rounded-lg shadow-lg hover:from-blue-600 hover:to-sky-700 transition-all duration-300">
+          <Link href="/">Back to home</Link>
+        </button>
+      </div>
+    </main>
+  );
 };
 
 export default ProfilePage;

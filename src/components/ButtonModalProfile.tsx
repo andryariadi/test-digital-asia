@@ -12,7 +12,6 @@ const ButtonModalProfile = ({ user }: { user: UserProps }) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        {/* Wrap kedua element dalam satu container */}
         <div className="flex items-center gap-2 cursor-pointer">
           <div className="bg-blue-200 w-10 h-10 rounded-full flex items-center justify-center">
             <span className="text-blue-900">{firstLetter}</span>
