@@ -1,20 +1,33 @@
-import { getUser } from "@/lib/actions/auth.action";
+"use client";
+
+import { UserProps } from "@/lib/types";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ButtonModalProfile from "./ButtonModalProfile";
 import Link from "next/link";
 
-const NavbarUser = async () => {
-  const user = await getUser();
+const NavbarUser = ({ user }: { user: UserProps }) => {
+  const [isScrolled, setIsScrolled] = useState(false);
 
-  console.log({ user }, "<---NavbarUser");
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className="b-pink-600 fixed top-0 left-0 z-50 w-full h-[5rem] flex items-center hover:backdrop-blur-md hover:shadow-md trasalllion-all duration-300">
-      <nav className="b-green-600 container mx-auto px-20 flex justify-between items-center">
+    <header className={`b-pink-600 fixed top-0 left-0 z-50 w-full h-[5rem] flex items-center ${isScrolled && "backdrop-blur-md shadow-md"} `}>
+      <nav className="container mx-auto px-4 md:px-20 flex justify-between items-center">
         {/* Logo */}
         <Link href="/">
-          <Image src="/logo.png" width={160} height={160} alt="Logo" />
+          <Image src="/logo.png" width={160} height={160} alt="Logo" className="w-32 md:w-40" />
         </Link>
 
         {/* Button Modal Profile */}

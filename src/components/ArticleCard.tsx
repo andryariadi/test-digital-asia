@@ -5,7 +5,7 @@ import Link from "next/link";
 import React from "react";
 
 const ArticleCard = ({ article }: { article: ArticleProps }) => {
-  console.log({ article }, "<---articleCard");
+  //   console.log({ article }, "<---articleCard");
 
   return (
     <figure className="group h-[423px] hover:bg-white hover:shadow-lg trassation-all duration-300 overflow-hidden rounded-[12px]">

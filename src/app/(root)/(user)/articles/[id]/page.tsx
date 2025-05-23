@@ -10,12 +10,12 @@ const ArticleDetails = async ({ params }: { params: Promise<{ id?: string }> }) 
   const { data: articles } = await getArticles();
   const article = await getArticle(id);
 
-  const otherArticles = articles
-    .filter((item: ArticleProps) => item.id !== article.id)
+  const sameCategoryArticles = articles
+    .filter((item: ArticleProps) => item.id !== article.id && item.categoryId === article.categoryId)
     .sort(() => 0.5 - Math.random())
     .slice(0, 3);
 
-  console.log({ article, articles, otherArticles }, "<---articleDetail");
+  console.log({ article, articles, sameCategoryArticles }, "<---articleDetail");
 
   return (
     <main className="b-green-500 pt-20 space-y-15 min-h-[calc(100vh-4.5rem)]">
@@ -49,7 +49,7 @@ const ArticleDetails = async ({ params }: { params: Promise<{ id?: string }> }) 
 
       {/* Other Article */}
       <section className="b-cyan-500 px-40">
-        <ArticleLists articles={otherArticles} isPagination={false} isLength={false} />
+        <ArticleLists articles={sameCategoryArticles} isPagination={false} isLength={false} />
       </section>
     </main>
   );

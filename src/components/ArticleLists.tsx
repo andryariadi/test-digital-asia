@@ -3,7 +3,7 @@ import React from "react";
 import ArticleCard from "./ArticleCard";
 import { cn } from "@/lib/utils";
 
-const ArticleLists = ({ articles, isPagination = true, isLength = true }: { articles: ArticleProps[]; isPagination?: boolean; isLength?: boolean }) => {
+const ArticleLists = ({ articles, articlesLength, isPagination = true, isLength = true }: { articles: ArticleProps[]; articlesLength?: number; isPagination?: boolean; isLength?: boolean }) => {
   console.log({ articles }, "<---articleLists");
 
   return (
@@ -11,7 +11,7 @@ const ArticleLists = ({ articles, isPagination = true, isLength = true }: { arti
       {/* Article length */}
       {isLength ? (
         <span className="text-slate-600 text-base font-normal">
-          Showing: {articles.length} of {articles.length} articles
+          Showing: {articles.length} of {articlesLength} articles
         </span>
       ) : (
         <h5 className="text-xl font-semibold text-slate-900">Other Articles</h5>
