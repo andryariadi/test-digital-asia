@@ -1,30 +1,32 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
+const authRoutes = ["/login", "/register"];
+const protectedRoutes = ["/", "/dashboard-articles", "/dashboard-category"];
+const adminRoutes = ["/dashboard-articles", "/dashboard-category"];
+
 export function middleware(request: NextRequest) {
   const token = request.cookies.get("accessToken")?.value;
+  const role = request.cookies.get("role")?.value;
   const { pathname } = request.nextUrl;
 
-  // Jika mencoba mengakses route protected tanpa login
-  if (!token && (pathname.startsWith("/") || pathname.startsWith("/dashboard"))) {
+  // Jika user sudah login dan mencoba mengakses auth routes
+  if (token && authRoutes.includes(pathname)) {
+    return NextResponse.redirect(new URL(role === "Admin" ? "/dashboard-articles" : "/", request.url));
+  }
+
+  // Jika user belum login dan mencoba mengakses protected routes
+  if (!token && protectedRoutes.includes(pathname)) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
-  // Jika sudah login tapi mencoba akses auth page
-  if (token && (pathname.startsWith("/login") || pathname.startsWith("/register"))) {
-    return NextResponse.redirect(new URL(token === "Admin" ? "/dashboard" : "/", request.url));
-  }
-
-  // Role-based redirect
+  // Redirect berdasarkan role
   if (token) {
-    const role = request.cookies.get("role")?.value;
-
-    if (role === "User" && pathname.startsWith("/dashboard")) {
-      return NextResponse.redirect(new URL("/", request.url));
+    if (role === "Admin" && pathname === "/") {
+      return NextResponse.redirect(new URL("/dashboard-articles", request.url));
     }
-
-    if (role === "Admin" && pathname.startsWith("/")) {
-      return NextResponse.redirect(new URL("/dashboard", request.url));
+    if (role === "User" && adminRoutes.includes(pathname)) {
+      return NextResponse.redirect(new URL("/", request.url));
     }
   }
 
@@ -32,5 +34,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)", "/(api|trpc)(.*)"],
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };

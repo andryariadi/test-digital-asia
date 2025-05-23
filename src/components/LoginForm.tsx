@@ -34,16 +34,11 @@ const LoginForm = () => {
       const res = await login(data);
 
       if (res.user) {
-        if (typeof window !== "undefined") {
-          localStorage.setItem("token", res.user.token);
-          localStorage.setItem("role", res.user.role);
-        }
-
         toast.success(res.message, {
           style: toastStyle,
         });
 
-        router.push(res.user.role === "Admin" ? "/dashboard" : "/");
+        router.push(res.user.role === "Admin" ? "/dashboard-articles" : "/");
       }
 
       console.log(res, "<---loginForm2");

@@ -22,3 +22,11 @@ export interface UserData {
   refreshToken?: string;
   expiresIn?: number;
 }
+
+export interface UserProps {
+  id: string;
+  username: string;
+  role: string;
+  createdAt: string;
+  updatedAt: string;
+}

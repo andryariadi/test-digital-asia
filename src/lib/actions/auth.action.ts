@@ -82,3 +82,61 @@ export const login = async (data: z.infer<typeof LoginFormValidation>) => {
     }
   }
 };
+
+export const logout = async () => {
+  try {
+    const cookieStore = await cookies();
+
+    console.log({ cookieStore }, "<---logoutAction");
+
+    cookieStore.delete("accessToken");
+    cookieStore.delete("role");
+
+    return {
+      message: "Logout successful",
+      success: true,
+    };
+  } catch (error: unknown) {
+    console.log(error, "<---Error in logoutAction");
+    if (error instanceof AxiosError) {
+      throw new Error(error.response?.data?.error || "An error occurred during login");
+    } else if (error instanceof Error) {
+      throw new Error(error.message);
+    } else {
+      throw new Error("An unknown error occurred");
+    }
+  }
+};
+
+export const getUser = async () => {
+  try {
+    const cookieStore = await cookies();
+
+    const token = cookieStore.get("accessToken")?.value;
+
+    // console.log({ token }, "<---getUserAction");
+
+    if (!token) {
+      throw new Error("No token found");
+    }
+
+    const res = await axios.get(`${BASE_URL}/auth/profile`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    // console.log({ data: res.data }, "<---getUserAction2");
+
+    return res.data;
+  } catch (error: unknown) {
+    console.log(error, "<---Error in getUserAction");
+    if (error instanceof AxiosError) {
+      throw new Error(error.response?.data?.error || "An error occurred during login");
+    } else if (error instanceof Error) {
+      throw new Error(error.message);
+    } else {
+      throw new Error("An unknown error occurred");
+    }
+  }
+};
