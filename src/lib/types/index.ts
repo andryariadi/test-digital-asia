@@ -1,5 +1,3 @@
-// types/api-response.ts
-// types/api-response.ts
 export interface ApiError {
   statusCode?: number;
   message?: string;
@@ -37,4 +35,17 @@ export interface CategoryProps {
   name: string;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface ArticleProps {
+  id: string;
+  userId: string;
+  categoryId: string;
+  title: string;
+  content: string;
+  imageUrl: string | null;
+  createdAt: string;
+  updatedAt: string;
+  category: CategoryProps;
+  user: Pick<UserProps, "id" | "username">; // Using only id and username from UserProps
 }

@@ -12,7 +12,7 @@ export const getCategories = async () => {
 
     return res.data;
   } catch (error: unknown) {
-    console.log(error, "<---Error in getUserAction");
+    console.log(error, "<---Error in getCategoriesAction");
     if (error instanceof AxiosError) {
       throw new Error(error.response?.data?.error || "An error occurred during login");
     } else if (error instanceof Error) {
