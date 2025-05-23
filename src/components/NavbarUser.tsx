@@ -9,8 +9,8 @@ const NavbarUser = async () => {
   console.log({ user }, "<---NavbarUser");
 
   return (
-    <header className="bg-pink-600 fixed top-0 left-0 z-50 w-full h-[5rem] flex items-center bg-opacity-90 backdrop-blur-md shadow-lg">
-      <nav className="bg-green-600 container mx-auto px-20 flex justify-between items-center">
+    <header className="b-pink-600 fixed top-0 left-0 z-50 w-full h-[5rem] flex items-center hover:backdrop-blur-md hover:shadow-md trasalllion-all duration-300">
+      <nav className="b-green-600 container mx-auto px-20 flex justify-between items-center">
         {/* Logo */}
         <Image src="/logo.png" width={160} height={160} alt="Logo" />
 

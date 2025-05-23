@@ -30,3 +30,11 @@ export interface UserProps {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface CategoryProps {
+  id: string;
+  userId: string;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+}
