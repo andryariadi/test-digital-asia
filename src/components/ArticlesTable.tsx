@@ -6,8 +6,9 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { formatDatee } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
+import ButtonModalDeleteArticle from "./ButtonModalDeleteArticle";
 
-const ArticlesTable = ({ articles }: { articles: ArticleProps[] }) => {
+const ArticlesTable = ({ articles, onEditArticle }: { articles: ArticleProps[]; onEditArticle: (id: string) => void }) => {
   console.log({ articles }, "<---articlesTable");
 
   return (
@@ -45,27 +46,27 @@ const ArticlesTable = ({ articles }: { articles: ArticleProps[] }) => {
 
             <TableCell className="text-center w-[225px] text-sm font-normal text-slate-600">
               <div className="flex items-center justify-center gap-3">
+                {/* Priview Link */}
                 <Link href={`/articles/${article.id}`} className="text-blue-600 hover:underline transition-all duration-300">
                   Priview
                 </Link>
-                <Link href={`/articles/${article.id}`} className="text-blue-600 hover:underline transition-all duration-300">
+
+                {/* Edit Button */}
+                <button onClick={() => onEditArticle(article.id)} className="text-blue-600 hover:underline transition-all duration-300">
                   Edit
-                </Link>
-                <Link href={`/articles/${article.id}`} className="text-red-500 hover:underline transition-all duration-300">
+                </button>
+
+                {/* Delete Button */}
+                {/* <Link href={`/articles/${article.id}`} className="text-red-500 hover:underline transition-all duration-300">
                   Delete
-                </Link>
+                </Link> */}
+
+                <ButtonModalDeleteArticle articleId={article.id} />
               </div>
             </TableCell>
           </TableRow>
         ))}
       </TableBody>
-
-      {/* <TableFooter>
-        <TableRow>
-          <TableCell colSpan={3}>Total</TableCell>
-          <TableCell className="text-right">$2,500.00</TableCell>
-        </TableRow>
-      </TableFooter> */}
     </Table>
   );
 };

@@ -105,3 +105,39 @@ matcher: ["/((?!\_next|[^?]_\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|
           <ArticlesTable articles={articles} />
         </div>
       </div>
+
+const [previewImage, setPreviewImage] = useState<string | null>(null);
+const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+const file = e.target.files?.[0];
+if (!file) return;
+
+    // Validasi tipe file
+    if (!file.type.match("image/jpeg") && !file.type.match("image/png")) {
+      setValue("imageUrl", null);
+      setPreviewImage(null);
+      return;
+    }
+
+    // Validasi ukuran file (max 2MB)
+    if (file.size > 2 * 1024 * 1024) {
+      setValue("imageUrl", null);
+      setPreviewImage(null);
+      return;
+    }
+
+    // Set preview gambar
+    const reader = new FileReader();
+    reader.onload = () => {
+      setPreviewImage(reader.result as string);
+    };
+    reader.readAsDataURL(file);
+
+    // Set value untuk form
+    setValue("imageUrl", file);
+
+};
+
+const removeImage = () => {
+setPreviewImage(null);
+setValue("imageUrl", null);
+};

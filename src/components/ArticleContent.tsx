@@ -7,7 +7,23 @@ import SearchArticles from "./SearchArticles";
 import { Plus } from "lucide-react";
 import ArticlesTable from "./ArticlesTable";
 
-const ArticleContent = ({ categories, articles, articlesLength, query, onAddArticle }: { categories: CategoryProps[]; articles: ArticleProps[]; articlesLength: number; query?: string; onAddArticle: () => void }) => {
+const ArticleContent = ({
+  categories,
+  articles,
+  articlesLength,
+  query,
+  onAddArticle,
+  onEditArticle,
+}: {
+  categories: CategoryProps[];
+  articles: ArticleProps[];
+  articlesLength: number;
+  query?: string;
+  onAddArticle: () => void;
+  onEditArticle: (id: string) => void;
+}) => {
+  console.log(onAddArticle, "<---onAddArticle");
+
   return (
     <section className="bg-amber-500">
       {/* Top */}
@@ -28,7 +44,7 @@ const ArticleContent = ({ categories, articles, articlesLength, query, onAddArti
 
           {/* Button Create */}
           <button
-            onClick={onAddArticle}
+            onClick={() => onAddArticle()}
             className="flex items-center gap-2 py-3 px-4 w-max bg-gradient-to-r from-blue-500 to-sky-600 text-white font-bold rounded-lg shadow-lg hover:from-blue-600 hover:to-sky-700 transition-all duration-300"
             type="submit"
           >
@@ -40,7 +56,7 @@ const ArticleContent = ({ categories, articles, articlesLength, query, onAddArti
 
       {/* Table */}
       <div className="b-rose-600">
-        <ArticlesTable articles={articles} />
+        <ArticlesTable articles={articles} onEditArticle={onEditArticle} />
       </div>
     </section>
   );
