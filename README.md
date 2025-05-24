@@ -72,3 +72,36 @@ return NextResponse.next();
 export const config = {
 matcher: ["/((?!\_next|[^?]_\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest))._)", "/(api|trpc)(.\*)"],
 };
+
+ <div className="b-amber-500">
+        {/* Top */}
+        <div className="b-rose-500 rounded-t-md overflow-hidden">
+          {/* Total Articles */}
+          <div className="bg-white p-6 border-b-2 border-slate-200">
+            <span>Total Articles: {articlesLength}</span>
+          </div>
+
+          {/* Action Button */}
+          <div className="bg-white p-6 flex items-center justify-between border-b-2 border-slate-200">
+            {/* Filter & Search */}
+            <div className="b-rose-600 flex items-center gap-2">
+              <FilterCategory caategories={categories} isAdmin={true} />
+
+              <SearchArticles query={query} action="/dashboard-articles" isAdmin={true} isArticle={true} />
+            </div>
+
+            {/* Button Create */}
+            {/* <div className="bg-purple-600"> */}
+            <button className="flex items-center gap-2 py-3 px-4 w-max bg-gradient-to-r from-blue-500 to-sky-600 text-white font-bold rounded-lg shadow-lg hover:from-blue-600 hover:to-sky-700 transition-all duration-300" type="submit">
+              <Plus size={20} className="text-slate-50" />
+              <span className="text-sm text-slate-50 font-medium">Add Articles</span>
+            </button>
+            {/* </div> */}
+          </div>
+        </div>
+
+        {/* Table */}
+        <div className="b-rose-600">
+          <ArticlesTable articles={articles} />
+        </div>
+      </div>

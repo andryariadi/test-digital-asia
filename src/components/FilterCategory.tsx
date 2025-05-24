@@ -4,8 +4,9 @@ import React from "react";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { CategoryProps } from "@/lib/types";
 import { useRouter, useSearchParams } from "next/navigation";
+import { cn } from "@/lib/utils";
 
-const FilterCategory = ({ caategories }: { caategories: CategoryProps[] }) => {
+const FilterCategory = ({ caategories, isAdmin = false }: { caategories: CategoryProps[]; isAdmin?: boolean }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -27,7 +28,7 @@ const FilterCategory = ({ caategories }: { caategories: CategoryProps[] }) => {
   return (
     <div className="w-full max-w-[180px]">
       <Select value={selectedCategory} onValueChange={handleChange}>
-        <SelectTrigger className="w-full bg-white data-[size=default]:h-9">
+        <SelectTrigger className={cn("w-full bg-white", { "data-[size=default]:h-9": isAdmin })}>
           <SelectValue placeholder="Select category" />
         </SelectTrigger>
         <SelectContent>

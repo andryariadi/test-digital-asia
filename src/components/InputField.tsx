@@ -1,3 +1,5 @@
+import { cn } from "@/lib/utils";
+
 type InputFieldProps = {
   label?: string;
   icon?: React.ReactNode;
@@ -10,9 +12,10 @@ type InputFieldProps = {
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   propData?: React.InputHTMLAttributes<HTMLInputElement>;
+  isArticleForm?: boolean;
 };
 
-const InputField = ({ label, icon, passIcon, openPass, setOpenPass, type, propData, ...props }: InputFieldProps) => {
+const InputField = ({ label, icon, passIcon, openPass, setOpenPass, type, propData, isArticleForm = false, ...props }: InputFieldProps) => {
   return (
     <div className="flex flex-col gap-2">
       {/* Label */}
@@ -35,7 +38,12 @@ const InputField = ({ label, icon, passIcon, openPass, setOpenPass, type, propDa
           {...propData}
           {...props}
           type={type}
-          className="w-full py-3 px-3 bg-dark-400 rounded-lg outline-none border border-gray-300 focus:border-logo text-slate-950 placeholder:text-sm placeholder-gray-500 placeholder-opacity-50 transition-all duration-300 appearance-none [&::-webkit-inner-spin-button]:hidden [&::-webkit-outer-spin-button]:hidden"
+          className={cn(
+            `w-full py-3 px-3 bg-dark-400 rounded-lg outline-none border border-gray-300 focus:border-logo text-slate-950 placeholder:text-sm placeholder-gray-500 placeholder-opacity-50 transition-all duration-300 appearance-none [&::-webkit-inner-spin-button]:hidden [&::-webkit-outer-spin-button]:hidden`,
+            {
+              "bg-white": isArticleForm,
+            }
+          )}
         />
       </div>
     </div>
