@@ -1,5 +1,5 @@
+import ButtonBack from "@/components/ButtonBack";
 import { getUser } from "@/lib/actions/auth.action";
-import Link from "next/link";
 import React from "react";
 
 const ProfilePage = async () => {
@@ -69,9 +69,7 @@ const ProfilePage = async () => {
         </div>
 
         {/* Bottom */}
-        <button className="py-3 px-4 mt-3 w-full bg-gradient-to-r from-blue-500 to-sky-600 text-white font-bold rounded-lg shadow-lg hover:from-blue-600 hover:to-sky-700 transition-all duration-300">
-          <Link href="/">Back to home</Link>
-        </button>
+        <ButtonBack />
       </div>
     </main>
   );

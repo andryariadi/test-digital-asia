@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { CircleX } from "lucide-react";
-const SearchFormReset = () => {
+import { cn } from "@/lib/utils";
+const SearchFormReset = ({ isAdmin = false }: { isAdmin?: boolean }) => {
   const reset = () => {
     const form = document.querySelector(".search") as HTMLFormElement;
 
@@ -11,7 +12,7 @@ const SearchFormReset = () => {
   return (
     <button type="reset" onClick={reset}>
       <Link href="/">
-        <CircleX size={24} className="text-slate-400" />
+        <CircleX className={cn("text-slate-400 size-[24px]", { "size-[18px]": isAdmin })} />
       </Link>
     </button>
   );

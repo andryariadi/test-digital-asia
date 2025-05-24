@@ -20,6 +20,20 @@ export const formatDate = (dateString: string) => {
   }).format(date);
 };
 
+export const formatDatee = (dateString: string) => {
+  const date = new Date(dateString);
+
+  return date.toLocaleString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+  });
+};
+
 export const stripHtmlTags = (html: string) => {
   if (typeof window === "undefined") {
     // Untuk server-side
