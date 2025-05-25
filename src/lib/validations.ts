@@ -17,3 +17,7 @@ export const ArticleFormValidation = z.object({
   content: z.string().min(10, "Content must be at least 10 characters"),
   imageUrl: z.string().min(1, "Image is required"),
 });
+
+export const CategoryFormValidation = z.object({
+  name: z.string().min(2, "Category name must be at least 2 characters"),
+});

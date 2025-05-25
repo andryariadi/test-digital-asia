@@ -1,11 +1,13 @@
 "use client";
 
 import React from "react";
-import { CategoryProps } from "@/lib/types";
+import { CategoryProps, UserProps } from "@/lib/types";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { formatDatee } from "@/lib/utils";
+import ButtonModalEditCategory from "./ButtonModalEditCategory";
+import ButtonModalDeleteCategory from "./ButtonModalDeleteCategory";
 
-const CategoryTable = ({ categories }: { categories: CategoryProps[] }) => {
+const CategoryTable = ({ categories, user }: { categories: CategoryProps[]; user: UserProps }) => {
   console.log({ categories }, "<---CategoryTable");
 
   return (
@@ -29,8 +31,11 @@ const CategoryTable = ({ categories }: { categories: CategoryProps[] }) => {
 
             <TableCell className="text-center w-[375px] text-sm font-normal text-slate-600">
               <div className="flex items-center justify-center gap-3">
-                <button className="text-blue-600 hover:underline transition-all duration-300">Edit</button>
-                <button className="text-red-500 hover:underline transition-all duration-300">Delete</button>
+                {/* Modal Edit */}
+                <ButtonModalEditCategory user={user} category={category} />
+
+                {/* Modal Delete */}
+                <ButtonModalDeleteCategory category={category} />
               </div>
             </TableCell>
           </TableRow>
