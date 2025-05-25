@@ -26,7 +26,7 @@ const FilterCategory = ({ caategories, isAdmin = false }: { caategories: Categor
   console.log({ caategories }, "<---filterCategory");
 
   return (
-    <div className="w-full max-w-[180px]">
+    <div className="w-full md:max-w-[180px]">
       <Select value={selectedCategory} onValueChange={handleChange}>
         <SelectTrigger className={cn("w-full bg-white", { "data-[size=default]:h-9": isAdmin })}>
           <SelectValue placeholder="Select category" />

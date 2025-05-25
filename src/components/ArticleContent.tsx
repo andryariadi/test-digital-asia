@@ -25,7 +25,7 @@ const ArticleContent = ({
   console.log(onAddArticle, "<---onAddArticle");
 
   return (
-    <section className="bg-amber-500">
+    <section className="b-amber-500">
       {/* Top */}
       <div className="b-rose-500 rounded-t-md overflow-hidden">
         {/* Total Articles */}

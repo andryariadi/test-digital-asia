@@ -1,4 +1,4 @@
-import { Newspaper, Tag, LogOut } from "lucide-react";
+import { Newspaper, Tag } from "lucide-react";
 import { LucideIcon } from "lucide-react";
 
 interface SidebarLink {
@@ -17,10 +17,5 @@ export const sidebarLinks: SidebarLink[] = [
     icon: Tag,
     route: "/dashboard-category",
     label: "Category",
-  },
-  {
-    icon: LogOut,
-    route: "/logout",
-    label: "Logout",
   },
 ];

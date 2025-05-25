@@ -1,7 +1,8 @@
 import ArticleLists from "@/components/ArticleLists";
+import MarkdownArticle from "@/components/MarkdownArticle";
 import { getArticle, getArticles } from "@/lib/actions/articles.action";
 import { ArticleProps } from "@/lib/types";
-import { formatDate, stripHtmlTags } from "@/lib/utils";
+import { formatDate } from "@/lib/utils";
 import Image from "next/image";
 import React from "react";
 
@@ -20,7 +21,7 @@ const ArticleDetails = async ({ params }: { params: Promise<{ id?: string }> }) 
   return (
     <main className="b-green-500 pt-20 space-y-15 min-h-[calc(100vh-4.5rem)]">
       {/* Article Details */}
-      <article className="b-amber-500 px-40 pt-10 h-[1308px]">
+      <article className="b-amber-500 w-full max-w-[1120px] mx-auto pt-10 h-[1308px]">
         <figure className="b-rose-500 h-full min-h-[480px] w-[1120px] space-y-10">
           {/* Top */}
           <div className="b-emerald-500 flex flex-col items-center justify-center gap-3">
@@ -42,7 +43,8 @@ const ArticleDetails = async ({ params }: { params: Promise<{ id?: string }> }) 
 
           {/* Description */}
           <figcaption>
-            <p className="text-base font-normal text-slate-700">{stripHtmlTags(article.content)}</p>
+            {/* <p className="text-base font-normal text-slate-700">{stripHtmlTags(article.content)}</p> */}
+            <MarkdownArticle content={article.content} />
           </figcaption>
         </figure>
       </article>

@@ -9,7 +9,7 @@ export default async function ArticlesHomePage({ searchParams }: { searchParams:
   const res = await getArticles();
   let articles: ArticleProps[] = res.data || [];
 
-  const articlesLength = res.data.length;
+  const articlesLength = res.total;
 
   if (query) {
     articles = articles.filter(
@@ -36,7 +36,7 @@ export default async function ArticlesHomePage({ searchParams }: { searchParams:
   console.log({ query, category }, "<---homePage");
 
   return (
-    <main className="b-amber-500 min-h-[calc(100vh-4.5rem)] space-y-10">
+    <main className="bg-amber-500 min-h-[calc(100vh-4.5rem)] space-y-10">
       <HeroSection query={query} />
       <ArticleLists articles={articles} articlesLength={articlesLength} />
     </main>

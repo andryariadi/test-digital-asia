@@ -140,6 +140,8 @@ const ArticleForm = ({ onCancel, user, categories, articleId }: { onCancel: () =
 
       if (isEditing && articleId) {
         const res = await updateArticle(articleId, articleData);
+        console.log({ res }, "<---updateArticle");
+
         if (res) {
           toast.success("Article updated successfully", {
             style: toastStyle,
@@ -147,6 +149,8 @@ const ArticleForm = ({ onCancel, user, categories, articleId }: { onCancel: () =
         }
       } else {
         const res = await createArticle(articleData);
+        console.log({ res }, "<---createArticle");
+
         if (res) {
           toast.success("Article created successfully", {
             style: toastStyle,

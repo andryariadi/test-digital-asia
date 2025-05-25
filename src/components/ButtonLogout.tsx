@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { toastStyle } from "@/lib/utils";
 
-const ButtonLogout = () => {
+const ButtonLogout = ({ isSidebar = false }: { isSidebar?: boolean }) => {
   const router = useRouter();
 
   const handleLogout = async () => {
@@ -26,7 +26,7 @@ const ButtonLogout = () => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <div className="b-green-700 text-red-500 flex items-center gap-2 cursor-pointer p-2 rounded-md">
+        <div className={`b-green-700 text-red-500 ${isSidebar && "text-white font-medium hover:bg-blue-500 transition duration-200"} flex items-center gap-2 cursor-pointer p-2 rounded-md`}>
           <LogOut className="size-5" />
           <span className="text-md font-semibold">Logout</span>
         </div>

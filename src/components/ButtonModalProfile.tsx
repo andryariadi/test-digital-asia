@@ -12,11 +12,11 @@ const ButtonModalProfile = ({ user }: { user: UserProps }) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <div className="flex items-center gap-2 cursor-pointer">
-          <div className="bg-blue-200 w-10 h-10 rounded-full flex items-center justify-center">
+        <div className="bg-rose-700 flex items-center gap-2 cursor-pointer">
+          <div className="bg-blue-200 w-[32px] h-[32px] md:w-10 md:h-10 rounded-full flex items-center justify-center">
             <span className="text-blue-900">{firstLetter}</span>
           </div>
-          <span className="capitalize text-slate-900 hover:underline transition-all duration-300">{user.username}</span>
+          <span className="hidden md:inline-block capitalize text-slate-900 hover:underline transition-all duration-300">{user.username}</span>
         </div>
       </DialogTrigger>
 

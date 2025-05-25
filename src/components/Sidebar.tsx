@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
+import ButtonLogout from "./ButtonLogout";
 
 const Sidebar = () => {
   const pathname = usePathname();
@@ -35,6 +36,9 @@ const Sidebar = () => {
             </Link>
           );
         })}
+
+        {/* Button Logout */}
+        <ButtonLogout isSidebar={true} />
       </aside>
     </section>
   );
