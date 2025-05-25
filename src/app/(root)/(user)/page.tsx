@@ -36,7 +36,7 @@ export default async function ArticlesHomePage({ searchParams }: { searchParams:
   console.log({ query, category }, "<---homePage");
 
   return (
-    <main className="bg-amber-500 min-h-[calc(100vh-4.5rem)] space-y-10">
+    <main className="b-amber-500 min-h-[calc(100vh-4.5rem)] space-y-10">
       <HeroSection query={query} />
       <ArticleLists articles={articles} articlesLength={articlesLength} />
     </main>

@@ -7,7 +7,6 @@ import { Toaster } from "react-hot-toast";
 const archivo = Archivo({
   subsets: ["latin"],
   variable: "--font-archivo",
-  // Anda bisa menambahkan weight atau style yang dibutuhkan
   weight: ["400", "500", "600", "700"],
 });
 
@@ -15,7 +14,7 @@ export const metadata: Metadata = {
   title: "Artivo",
   description: "Artivo is a platform for sharing and discovering articles.",
   icons: {
-    icon: "/icon.png",
+    icon: "/logo.png",
   },
 };
 
@@ -26,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${archivo.variable} font-sans antialiased bg-[#F5F5F5]`}>
+      <body style={{ fontFamily: archivo.style.fontFamily }} className={`font-${archivo.style.fontFamily} antialiased bg-[#F5F5F5]`}>
         {children}
         <Toaster position="top-right" />
       </body>

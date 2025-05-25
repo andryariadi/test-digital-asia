@@ -59,7 +59,7 @@ const RegisterForm = () => {
     }
   };
   return (
-    <form onSubmit={handleSubmit(handleSubmitLogin)} className="b-sky-500 w-full min-h-[35rem] flex items-center justify-center">
+    <form onSubmit={handleSubmit(handleSubmitLogin)} className="b-sky-500 w-full min-h-[35rem] px-4 md:px-0 flex items-center justify-center">
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="bg-white shadow-lg h-full w-full max-w-md rounded-lg p-5 space-y-5">
         {/* Logo */}
         <div className="b-amber-500 w-full pt-5 pb-2 flex items-center justify-center rounded-lg">
