@@ -45,7 +45,7 @@ export const login = async (data: z.infer<typeof LoginFormValidation>) => {
         httpOnly: true,
         secure: true,
         sameSite: "strict",
-        expires: 60 * 60 * 60,
+        maxAge: 60 * 60 * 60 * 1000,
         path: "/",
       });
     }
@@ -57,7 +57,7 @@ export const login = async (data: z.infer<typeof LoginFormValidation>) => {
         httpOnly: true,
         secure: true,
         sameSite: "strict",
-        expires: 60 * 60 * 60,
+        maxAge: 60 * 60 * 60 * 1000,
         path: "/",
       });
     }

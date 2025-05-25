@@ -28,10 +28,10 @@ const LoginForm = () => {
   });
 
   const handleSubmitLogin: SubmitHandler<z.infer<typeof LoginFormValidation>> = async (data) => {
-    // console.log({ data }, "<---loginForm");
-
     try {
       const res = await login(data);
+
+      console.log({ res }, "<---resLoginForm");
 
       if (res.user) {
         toast.success(res.message, {
@@ -40,8 +40,6 @@ const LoginForm = () => {
 
         router.push(res.user.role === "Admin" ? "/dashboard-articles" : "/");
       }
-
-      // console.log(res, "<---loginForm2");
     } catch (error) {
       if (error instanceof Error) {
         console.log(error.message);

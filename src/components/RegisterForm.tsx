@@ -30,8 +30,6 @@ const RegisterForm = () => {
   });
 
   const handleSubmitLogin: SubmitHandler<z.infer<typeof RegisterFormValidation>> = async (data) => {
-    // console.log({ data }, "<---registerForm");
-
     try {
       const res = await singup(data);
 
@@ -42,8 +40,6 @@ const RegisterForm = () => {
 
         router.push("/login");
       }
-
-      // console.log(res, "<---registerForm2");
     } catch (error) {
       if (error instanceof Error) {
         console.log(error.message);
@@ -131,7 +127,7 @@ const RegisterForm = () => {
           <p className="text-center text-gray-600 font-[500]">
             Already have an account?
             <Link href="/login" className="text-sky-500 ml-2 inline-block hover:scale-110 hover:underline transition-all duration-300">
-              Singup
+              Login
             </Link>
           </p>
         </div>
