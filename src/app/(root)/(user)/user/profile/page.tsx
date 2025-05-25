@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import ButtonBack from "@/components/ButtonBack";
 import { getUser } from "@/lib/actions/auth.action";
 import React from "react";
