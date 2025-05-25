@@ -6,11 +6,11 @@ import { cookies } from "next/headers";
 
 const BASE_URL = "https://test-fe.mysellerpintar.com/api";
 
-export const getCategories = async () => {
+export const getCategories = async (page = 1, limit = 10) => {
   try {
-    const res = await axios.get(`${BASE_URL}/categories`);
+    const res = await axios.get(`${BASE_URL}/categories?page=${page}&limit=${limit}`);
 
-    console.log({ data: res.data }, "<---getCategories");
+    // console.log({ data: res.data }, "<---getCategories");
 
     return res.data;
   } catch (error: unknown) {

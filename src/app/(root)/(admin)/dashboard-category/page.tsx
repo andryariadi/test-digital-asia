@@ -5,19 +5,26 @@ import CategoryTable from "@/components/CategoryTable";
 import { CategoryProps } from "@/lib/types";
 import ButtonModalAddCategory from "@/components/ButtonModalAddCategory";
 import { getUser } from "@/lib/actions/auth.action";
+import ButtonPagination from "@/components/ButtonPagination";
 
-const DashboardCategoryPage = async ({ searchParams }: { searchParams: Promise<{ query?: string }> }) => {
-  const { query } = await searchParams;
+const DashboardCategoryPage = async ({ searchParams }: { searchParams: Promise<{ query?: string; page?: string }> }) => {
+  const { query, page } = await searchParams;
 
   const user = await getUser();
 
-  const res = await getCategories();
+  const limit = 10;
+
+  // Get total articles first to calculate totalPages
+  const resForTotal = await getCategories(1, limit);
+  const categoriesLength = resForTotal.totalData;
+  const totalPages = Math.ceil(categoriesLength / limit);
+  const currentPage = Math.max(1, Math.min(Number(page) || 1, totalPages));
+
+  const res = await getCategories(currentPage, limit);
   let categories: CategoryProps[] = res.data || [];
 
-  const categoriesLength = res.totalData;
-
   if (query) {
-    categories = categories.filter((article) => article.name.toLowerCase() === query.toLowerCase());
+    categories = categories.filter((category) => category.name.toLowerCase().includes(query.toLowerCase()));
   }
 
   // console.log({ query, categories }, "<---dashboardCategoryPage");
@@ -48,6 +55,13 @@ const DashboardCategoryPage = async ({ searchParams }: { searchParams: Promise<{
         <div className="b-rose-600">
           <CategoryTable categories={categories} user={user} />
         </div>
+
+        {/* Pagination */}
+        {categoriesLength > 10 && (
+          <div className="bg-white border-2 border-slate-200 rounded-b-md h-[88px] flex items-center justify-center">
+            <ButtonPagination currentPage={currentPage} totalPages={totalPages} />
+          </div>
+        )}
       </div>
     </main>
   );

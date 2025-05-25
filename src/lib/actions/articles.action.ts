@@ -6,11 +6,13 @@ import { cookies } from "next/headers";
 
 const BASE_URL = "https://test-fe.mysellerpintar.com/api";
 
-export const getArticles = async () => {
-  try {
-    const res = await axios.get(`${BASE_URL}/articles`);
+export const getArticles = async (page = 1, limit = 10) => {
+  console.log({ page, limit }, "<---getArticlesAction");
 
-    console.log({ data: res.data }, "<---getArticles");
+  try {
+    const res = await axios.get(`${BASE_URL}/articles?page=${page}&limit=${limit}`);
+
+    // console.log({ data: res.data }, "<---getArticles");
 
     return res.data;
   } catch (error: unknown) {
@@ -24,11 +26,12 @@ export const getArticles = async () => {
     }
   }
 };
+
 export const getArticle = async (id: string | undefined) => {
   try {
     const res = await axios.get(`${BASE_URL}/articles/${id}`);
 
-    console.log({ data: res.data }, "<---getArticles");
+    // console.log({ data: res.data }, "<---getArticles");
 
     return res.data;
   } catch (error: unknown) {

@@ -33,7 +33,10 @@ const FilterCategory = ({ caategories, isAdmin = false }: { caategories: Categor
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
-            <SelectLabel>Role</SelectLabel>
+            <SelectLabel>Role</SelectLabel>{" "}
+            <SelectItem key="all" value="all">
+              All
+            </SelectItem>
             {caategories.map((category) => (
               <SelectItem key={category.id} value={category.name}>
                 {category.name}

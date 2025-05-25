@@ -6,12 +6,16 @@ import FilterCategory from "./FilterCategory";
 import SearchArticles from "./SearchArticles";
 import { Plus } from "lucide-react";
 import ArticlesTable from "./ArticlesTable";
+import ButtonPagination from "./ButtonPagination";
 
 const ArticleContent = ({
   categories,
   articles,
   articlesLength,
   query,
+  currentPage = 1,
+  totalPages = 1,
+  isPagination = true,
   onAddArticle,
   onEditArticle,
 }: {
@@ -19,10 +23,15 @@ const ArticleContent = ({
   articles: ArticleProps[];
   articlesLength: number;
   query?: string;
+  currentPage?: number;
+  totalPages?: number;
+  isPagination?: boolean;
   onAddArticle: () => void;
   onEditArticle: (id: string) => void;
 }) => {
   console.log(onAddArticle, "<---onAddArticle");
+
+  const showPagination = isPagination && articlesLength > 10;
 
   return (
     <section className="b-amber-500">
@@ -55,9 +64,12 @@ const ArticleContent = ({
       </div>
 
       {/* Table */}
-      <div className="b-rose-600">
+      <div className="b-sky-600">
         <ArticlesTable articles={articles} onEditArticle={onEditArticle} />
       </div>
+
+      {/* Pagination */}
+      <div className="bg-white border-2 border-slate-200 rounded-b-md h-[88px] flex items-center justify-center">{showPagination && <ButtonPagination currentPage={currentPage} totalPages={totalPages} />}</div>
     </section>
   );
 };

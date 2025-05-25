@@ -12,12 +12,16 @@ const ArticleViewSwitcher = ({
   initialArticles,
   initialArticlesLength,
   initialQuery,
+  currentPage,
+  totalPages,
 }: {
   initialUser: UserProps;
   initialCategories: CategoryProps[];
   initialArticles: ArticleProps[];
   initialArticlesLength: number;
   initialQuery?: string;
+  currentPage?: number;
+  totalPages?: number;
 }) => {
   const [showForm, setShowForm] = useState(false);
   const [articleId, setArticleId] = useState<string | null>(null);
@@ -40,6 +44,8 @@ const ArticleViewSwitcher = ({
           categories={initialCategories}
           articlesLength={initialArticlesLength}
           query={initialQuery}
+          currentPage={currentPage}
+          totalPages={totalPages}
           onAddArticle={() => {
             setShowForm(true);
             setArticleId(null);

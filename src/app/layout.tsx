@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   title: "Artivo",
   description: "Artivo is a platform for sharing and discovering articles.",
   icons: {
-    icon: "/logo.png",
+    icon: "/icon.png",
   },
 };
 

@@ -5,17 +5,23 @@ import { ArticleProps } from "@/lib/types";
 import ArticleViewSwitcher from "@/components/ArticleViewSwitcher";
 import { getUser } from "@/lib/actions/auth.action";
 
-const DashboardArticlesPage = async ({ searchParams }: { searchParams: Promise<{ query?: string; category?: string }> }) => {
-  const { query, category } = await searchParams;
+const DashboardArticlesPage = async ({ searchParams }: { searchParams: Promise<{ query?: string; category?: string; page?: string }> }) => {
+  const { query, category, page } = await searchParams;
 
   const user = await getUser();
 
   const { data: categories } = await getCategories();
 
-  const res = await getArticles();
-  let articles: ArticleProps[] = res.data || [];
+  const limit = 10;
 
-  const articlesLength = res.total;
+  // Get total articles first to calculate totalPages
+  const resForTotal = await getArticles(1, limit);
+  const articlesLength = resForTotal.total;
+  const totalPages = Math.ceil(articlesLength / limit);
+  const currentPage = Math.max(1, Math.min(Number(page) || 1, totalPages));
+
+  const res = await getArticles(currentPage, limit);
+  let articles: ArticleProps[] = res.data || [];
 
   if (query) {
     articles = articles.filter(
@@ -33,7 +39,7 @@ const DashboardArticlesPage = async ({ searchParams }: { searchParams: Promise<{
   return (
     <main className="b-fuchsia-500 min-h-screen pt-[100px] p-6">
       {/* Content */}
-      <ArticleViewSwitcher initialUser={user} initialCategories={categories} initialArticles={articles} initialArticlesLength={articlesLength} initialQuery={query} />
+      <ArticleViewSwitcher initialUser={user} initialCategories={categories} initialArticles={articles} initialArticlesLength={articlesLength} initialQuery={query} currentPage={currentPage} totalPages={totalPages} />
     </main>
   );
 };

@@ -57,10 +57,6 @@ const ArticlesTable = ({ articles, onEditArticle }: { articles: ArticleProps[]; 
                 </button>
 
                 {/* Delete Button */}
-                {/* <Link href={`/articles/${article.id}`} className="text-red-500 hover:underline transition-all duration-300">
-                  Delete
-                </Link> */}
-
                 <ButtonModalDeleteArticle articleId={article.id} />
               </div>
             </TableCell>
