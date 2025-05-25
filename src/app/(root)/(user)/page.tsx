@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import ArticleLists from "@/components/ArticleLists";
 import HeroSection from "@/components/HeroSection";
 import { getArticles } from "@/lib/actions/articles.action";

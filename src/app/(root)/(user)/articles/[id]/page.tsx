@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import ArticleLists from "@/components/ArticleLists";
 import MarkdownArticle from "@/components/MarkdownArticle";
 import { getArticle, getArticles } from "@/lib/actions/articles.action";

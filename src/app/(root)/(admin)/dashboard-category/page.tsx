@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import React from "react";
 import SearchArticles from "@/components/SearchArticles";
 import { getCategories } from "@/lib/actions/categories.action";
