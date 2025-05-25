@@ -19,8 +19,6 @@ const DashboardArticlesPage = async ({ searchParams }: { searchParams: Promise<{
   const { totalData } = await getCategories();
   const { data: categoriesForSelect } = await getCategories(1, totalData);
 
-  console.log({ totalData, categoriesForSelect }, "<---dashboardArticlesPage");
-
   const limit = 10;
 
   // Get total articles first to calculate totalPages

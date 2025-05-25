@@ -43,9 +43,9 @@ export const login = async (data: z.infer<typeof LoginFormValidation>) => {
         name: "accessToken",
         value: res.data.token,
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
+        secure: true,
         sameSite: "strict",
-        maxAge: 60 * 60 * 60 * 1000,
+        expires: 60 * 60 * 60,
         path: "/",
       });
     }
@@ -55,9 +55,9 @@ export const login = async (data: z.infer<typeof LoginFormValidation>) => {
         name: "role",
         value: res.data.role,
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
+        secure: true,
         sameSite: "strict",
-        maxAge: 60 * 60 * 60 * 1000,
+        expires: 60 * 60 * 60,
         path: "/",
       });
     }
