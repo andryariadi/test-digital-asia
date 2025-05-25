@@ -1,5 +1,5 @@
 import { ArticleProps } from "@/lib/types";
-import React from "react";
+import React, { Suspense } from "react";
 import ArticleCard from "./ArticleCard";
 import { cn } from "@/lib/utils";
 import ButtonPagination from "./ButtonPagination";
@@ -24,25 +24,29 @@ const ArticleLists = ({
   const showPagination = isPagination && articlesLength > 10;
 
   return (
-    <section className={cn(`b-green-600 ${isLength ? "px-4 md:px-10 lg:px-20 xl:px-32" : "px-0"} ${isPagination ? "pb-40" : "pb-32"} flex flex-col justify-start gap-5`)}>
+    <section className={cn(`${isLength ? "px-4 md:px-10 lg:px-20 xl:px-32" : "px-0"} ${isPagination ? "pb-40" : "pb-32"} flex flex-col justify-start gap-5`)}>
       {/* Article length */}
       {isLength ? (
-        <span className="text-slate-600 text-base font-normal">
-          Showing: {articles.length} of {articlesLength} articles
-        </span>
+        <Suspense fallback={<h1 className="text-xl font-semibold text-sky-500">Loading...</h1>}>
+          <span className="text-slate-600 text-base font-normal">
+            Showing: {articles.length} of {articlesLength} articles
+          </span>
+        </Suspense>
       ) : (
         <h5 className="text-xl font-semibold text-slate-900">Other Articles</h5>
       )}
 
       {/* Article Card Lists */}
-      <div className="b-fuchsia-500 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[24px]">
-        {articles.map((article) => (
-          <ArticleCard key={article.id} article={article} />
-        ))}
-      </div>
+      <Suspense fallback={<h1 className="text-xl font-semibold text-sky-500">Loading...</h1>}>
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[24px]">
+          {articles.map((article) => (
+            <ArticleCard key={article.id} article={article} />
+          ))}
+        </div>
+      </Suspense>
 
       {/* Pagination */}
-      <div className="b-rose-700 pt-16">{showPagination && <ButtonPagination currentPage={currentPage} totalPages={totalPages} />}</div>
+      <div className="pt-16">{showPagination && <ButtonPagination currentPage={currentPage} totalPages={totalPages} />}</div>
     </section>
   );
 };

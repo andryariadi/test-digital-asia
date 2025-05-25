@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { Suspense } from "react";
 import { ArticleProps } from "@/lib/types";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { formatDatee } from "@/lib/utils";
@@ -9,8 +9,6 @@ import Link from "next/link";
 import ButtonModalDeleteArticle from "./ButtonModalDeleteArticle";
 
 const ArticlesTable = ({ articles, onEditArticle }: { articles: ArticleProps[]; onEditArticle: (id: string) => void }) => {
-  console.log({ articles }, "<---articlesTable");
-
   return (
     <Table>
       <TableHeader>
@@ -28,40 +26,42 @@ const ArticlesTable = ({ articles, onEditArticle }: { articles: ArticleProps[]; 
       </TableHeader>
 
       <TableBody className="bg-white">
-        {articles.map((article) => (
-          <TableRow key={article.id} className="h-24">
-            <TableCell className="h-[96px] w-[225px] text-sm font-normal text-slate-600">
-              <div className="flex items-center justify-center">
-                <div className="relative size-16">
-                  <Image src={article.imageUrl ?? "https://placehold.co/600x400/png"} alt={article.title} fill className="object-cover rounded-[6px]" />
+        <Suspense fallback={<h1 className="text-xl font-semibold text-sky-500">Loading...</h1>}>
+          {articles.map((article) => (
+            <TableRow key={article.id} className="h-24">
+              <TableCell className="h-[96px] w-[225px] text-sm font-normal text-slate-600">
+                <div className="flex items-center justify-center">
+                  <div className="relative size-16">
+                    <Image src={article.imageUrl ?? "https://placehold.co/600x400/png"} alt={article.title} fill className="object-cover rounded-[6px]" />
+                  </div>
                 </div>
-              </div>
-            </TableCell>
+              </TableCell>
 
-            <TableCell className="text-center w-[225px] text-sm font-normal text-slate-600 text-wrap">{article.title}</TableCell>
+              <TableCell className="text-center w-[225px] text-sm font-normal text-slate-600 text-wrap">{article.title}</TableCell>
 
-            <TableCell className="text-center w-[225px] text-sm font-normal text-slate-600">{article.category.name}</TableCell>
+              <TableCell className="text-center w-[225px] text-sm font-normal text-slate-600">{article.category.name}</TableCell>
 
-            <TableCell className="text-center w-[225px] text-sm font-normal text-slate-600">{formatDatee(article.createdAt)}</TableCell>
+              <TableCell className="text-center w-[225px] text-sm font-normal text-slate-600">{formatDatee(article.createdAt)}</TableCell>
 
-            <TableCell className="text-center w-[225px] text-sm font-normal text-slate-600">
-              <div className="flex items-center justify-center gap-3">
-                {/* Priview Link */}
-                <Link href={`/articles/${article.id}`} className="text-blue-600 hover:underline transition-all duration-300">
-                  Priview
-                </Link>
+              <TableCell className="text-center w-[225px] text-sm font-normal text-slate-600">
+                <div className="flex items-center justify-center gap-3">
+                  {/* Priview Link */}
+                  <Link href={`/articles/${article.id}`} className="text-blue-600 hover:underline transition-all duration-300">
+                    Priview
+                  </Link>
 
-                {/* Edit Button */}
-                <button onClick={() => onEditArticle(article.id)} className="text-blue-600 hover:underline transition-all duration-300">
-                  Edit
-                </button>
+                  {/* Edit Button */}
+                  <button onClick={() => onEditArticle(article.id)} className="text-blue-600 hover:underline transition-all duration-300">
+                    Edit
+                  </button>
 
-                {/* Delete Button */}
-                <ButtonModalDeleteArticle articleId={article.id} />
-              </div>
-            </TableCell>
-          </TableRow>
-        ))}
+                  {/* Delete Button */}
+                  <ButtonModalDeleteArticle articleId={article.id} />
+                </div>
+              </TableCell>
+            </TableRow>
+          ))}
+        </Suspense>
       </TableBody>
     </Table>
   );

@@ -11,7 +11,10 @@ const archivo = Archivo({
 });
 
 export const metadata: Metadata = {
-  title: "Artivo",
+  title: {
+    default: "Artivo",
+    template: "%s | Artivo",
+  },
   description: "Artivo is a platform for sharing and discovering articles.",
   icons: {
     icon: "/icon.png",

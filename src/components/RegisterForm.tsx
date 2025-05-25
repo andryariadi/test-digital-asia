@@ -30,7 +30,7 @@ const RegisterForm = () => {
   });
 
   const handleSubmitLogin: SubmitHandler<z.infer<typeof RegisterFormValidation>> = async (data) => {
-    console.log({ data }, "<---registerForm");
+    // console.log({ data }, "<---registerForm");
 
     try {
       const res = await singup(data);
@@ -43,7 +43,7 @@ const RegisterForm = () => {
         router.push("/login");
       }
 
-      console.log(res, "<---registerForm2");
+      // console.log(res, "<---registerForm2");
     } catch (error) {
       if (error instanceof Error) {
         console.log(error.message);
@@ -59,15 +59,15 @@ const RegisterForm = () => {
     }
   };
   return (
-    <form onSubmit={handleSubmit(handleSubmitLogin)} className="b-sky-500 w-full min-h-[35rem] px-4 md:px-0 flex items-center justify-center">
+    <form onSubmit={handleSubmit(handleSubmitLogin)} className="w-full min-h-[35rem] px-4 md:px-0 flex items-center justify-center">
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="bg-white shadow-lg h-full w-full max-w-md rounded-lg p-5 space-y-5">
         {/* Logo */}
-        <div className="b-amber-500 w-full pt-5 pb-2 flex items-center justify-center rounded-lg">
+        <div className="w-full pt-5 pb-2 flex items-center justify-center rounded-lg">
           <Image src="/logo.png" alt="Logo" width={160} height={160} />
         </div>
 
         {/* Form Input */}
-        <div className="b-emerald-500 grid grid-cols-1 gap-6">
+        <div className="grid grid-cols-1 gap-6">
           <div className="relative">
             <InputField type="text" label="Username" placeholder="Username" name="username" propData={{ ...register("username") }} />
 
@@ -127,7 +127,7 @@ const RegisterForm = () => {
         </div>
 
         {/* Link to login */}
-        <div className="b-gray-800 bg-opacity-50 px-8 py-4 text-sm">
+        <div className="bg-opacity-50 px-8 py-4 text-sm">
           <p className="text-center text-gray-600 font-[500]">
             Already have an account?
             <Link href="/login" className="text-sky-500 ml-2 inline-block hover:scale-110 hover:underline transition-all duration-300">

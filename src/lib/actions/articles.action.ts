@@ -7,12 +7,8 @@ import { cookies } from "next/headers";
 const BASE_URL = "https://test-fe.mysellerpintar.com/api";
 
 export const getArticles = async (page = 1, limit = 10) => {
-  console.log({ page, limit }, "<---getArticlesAction");
-
   try {
     const res = await axios.get(`${BASE_URL}/articles?page=${page}&limit=${limit}`);
-
-    // console.log({ data: res.data }, "<---getArticles");
 
     return res.data;
   } catch (error: unknown) {
@@ -31,8 +27,6 @@ export const getArticle = async (id: string | undefined) => {
   try {
     const res = await axios.get(`${BASE_URL}/articles/${id}`);
 
-    // console.log({ data: res.data }, "<---getArticles");
-
     return res.data;
   } catch (error: unknown) {
     console.log(error, "<---Error in getArticlesAction");
@@ -47,8 +41,6 @@ export const getArticle = async (id: string | undefined) => {
 };
 
 export const uploadImg = async (file: File) => {
-  console.log({ file }, "<---uploadImgAction");
-
   try {
     const cookieStore = await cookies();
     const token = cookieStore.get("accessToken")?.value;
@@ -58,11 +50,8 @@ export const uploadImg = async (file: File) => {
     }
 
     const formData = new FormData();
-    console.log({ formData }, "<---formData in uploadImgAction");
 
     formData.append("image", file);
-
-    console.log({ formData }, "<---formData after appending image in uploadImgAction");
 
     const res = await axios.post(`${BASE_URL}/upload`, formData, {
       headers: {
@@ -70,8 +59,6 @@ export const uploadImg = async (file: File) => {
         "Content-Type": "multipart/form-data",
       },
     });
-
-    // revalidatePath("/dashboard-articles");
 
     return res.data;
   } catch (error: unknown) {
@@ -126,8 +113,6 @@ export const createArticle = async (data: { title: string; categoryId: string; c
 };
 
 export const updateArticle = async (articleId: string, articleData: { title: string; categoryId: string; content: string; imageUrl: string; userId: string }) => {
-  console.log({ articleId, articleData }, "<---updateArticleAction");
-
   try {
     const cookieStore = await cookies();
     const token = cookieStore.get("accessToken")?.value;
@@ -167,8 +152,6 @@ export const updateArticle = async (articleId: string, articleData: { title: str
 };
 
 export const deleteArticle = async (articleId: string) => {
-  console.log({ articleId }, "<---deleteArticleAction");
-
   try {
     const cookieStore = await cookies();
     const token = cookieStore.get("accessToken")?.value;

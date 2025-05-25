@@ -10,8 +10,6 @@ const ButtonModalDeleteArticle = ({ articleId }: { articleId: string }) => {
     try {
       const res = await deleteArticle(articleId);
 
-      console.log({ res }, "<---deleteArticle");
-
       if (res) {
         toast.success("Article deleted successfully", {
           style: toastStyle,
@@ -32,7 +30,7 @@ const ButtonModalDeleteArticle = ({ articleId }: { articleId: string }) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <div className="b-green-700 text-red-500 flex items-center gap-2 cursor-pointer p-2 rounded-md">
+        <div className="text-red-500 flex items-center gap-2 cursor-pointer p-2 rounded-md">
           <span className="text-red-500 hover:underline transition-all duration-300">Delete</span>
         </div>
       </AlertDialogTrigger>

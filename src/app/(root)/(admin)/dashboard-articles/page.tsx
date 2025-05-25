@@ -4,13 +4,22 @@ import { getCategories } from "@/lib/actions/categories.action";
 import { ArticleProps } from "@/lib/types";
 import ArticleViewSwitcher from "@/components/ArticleViewSwitcher";
 import { getUser } from "@/lib/actions/auth.action";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Dashboard Articles",
+  description: "Manage your articles in the Artivo dashboard",
+};
 
 const DashboardArticlesPage = async ({ searchParams }: { searchParams: Promise<{ query?: string; category?: string; page?: string }> }) => {
   const { query, category, page } = await searchParams;
 
   const user = await getUser();
 
-  const { data: categories } = await getCategories();
+  const { totalData } = await getCategories();
+  const { data: categoriesForSelect } = await getCategories(1, totalData);
+
+  console.log({ totalData, categoriesForSelect }, "<---dashboardArticlesPage");
 
   const limit = 10;
 
@@ -34,12 +43,14 @@ const DashboardArticlesPage = async ({ searchParams }: { searchParams: Promise<{
     articles = articles.filter((article) => article.category.name.toLowerCase() === category.toLowerCase());
   }
 
-  // console.log({ query, category, user, articles, categories }, "<---dashboardArticlesPage");
+  if (category === "all") {
+    articles = res.data || [];
+  }
 
   return (
-    <main className="b-fuchsia-500 min-h-screen pt-[100px] p-6">
+    <main className="min-h-screen pt-[100px] p-6">
       {/* Content */}
-      <ArticleViewSwitcher initialUser={user} initialCategories={categories} initialArticles={articles} initialArticlesLength={articlesLength} initialQuery={query} currentPage={currentPage} totalPages={totalPages} />
+      <ArticleViewSwitcher initialUser={user} initialCategoriesForSelect={categoriesForSelect} initialArticles={articles} initialArticlesLength={articlesLength} initialQuery={query} currentPage={currentPage} totalPages={totalPages} />
     </main>
   );
 };

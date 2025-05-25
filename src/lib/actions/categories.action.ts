@@ -10,8 +10,6 @@ export const getCategories = async (page = 1, limit = 10) => {
   try {
     const res = await axios.get(`${BASE_URL}/categories?page=${page}&limit=${limit}`);
 
-    // console.log({ data: res.data }, "<---getCategories");
-
     return res.data;
   } catch (error: unknown) {
     console.log(error, "<---Error in getCategoriesAction");
@@ -26,8 +24,6 @@ export const getCategories = async (page = 1, limit = 10) => {
 };
 
 export const createCategory = async (data: { name: string; userId: string }) => {
-  console.log({ data }, "<---createCategoryAction");
-
   try {
     const cookieStore = await cookies();
     const token = cookieStore.get("accessToken")?.value;
@@ -64,8 +60,6 @@ export const createCategory = async (data: { name: string; userId: string }) => 
 };
 
 export const updateCategory = async (categoryId: string, data: { name: string; userId: string }) => {
-  console.log({ data }, "<---createCategoryAction");
-
   try {
     const cookieStore = await cookies();
     const token = cookieStore.get("accessToken")?.value;

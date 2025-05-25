@@ -12,7 +12,7 @@ const ButtonModalProfile = ({ user, isAdmin = false }: { user: UserProps; isAdmi
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <div className="b-rose-700 flex items-center gap-2 cursor-pointer">
+        <div className="flex items-center gap-2 cursor-pointer">
           <div className="bg-blue-200 w-[32px] h-[32px] md:w-10 md:h-10 rounded-full flex items-center justify-center">
             <span className="text-blue-900">{firstLetter}</span>
           </div>
@@ -21,15 +21,15 @@ const ButtonModalProfile = ({ user, isAdmin = false }: { user: UserProps; isAdmi
       </DialogTrigger>
 
       <DialogContent className="w-[224px] sm:max-w-[224px] b-sky-200 -right-[6rem] md:-right-16 xl:-right-8">
-        <div className="b-sky-700">
-          <div className="b-cyan-600 px-3 border-b-2 border-slate-300 py-3">
+        <div>
+          <div className="px-3 border-b-2 border-slate-300 py-3">
             <Link href={`/user/profile`} className="text-slate-600 font-semibold">
               My Account
             </Link>
           </div>
 
           {/* Button Logout */}
-          <div className="b-green-500 py-1">
+          <div>
             <ButtonLogout />
           </div>
         </div>

@@ -10,13 +10,12 @@ export default async function DashboardLayout({
 }>) {
   const user = await getUser();
 
-  console.log({ user }, "<---userDashboardLayout");
   return (
-    <div className="b-rose-600 flex flex-row min-h-screen">
+    <div className="flex flex-row min-h-screen">
       <Sidebar />
 
       {/* Navbar and Content */}
-      <div className="b-cyan-500 w-full max-w-7xl">
+      <div className="w-full max-w7xl pl-[10rem] lg:pl-[12rem] xl:pl-[16.5rem]">
         <NavbarAdmin user={user} />
         {children}
       </div>

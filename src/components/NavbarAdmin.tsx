@@ -34,7 +34,7 @@ const NavbarAdmin = ({ user }: { user: UserProps }) => {
   const routeName = getRouteName();
   return (
     <header
-      className={`bg-gray-50 fixed top-0 right-0 z-50 w-[calc(100%-150px)] lg:w-[calc(100%-192px)] xl:w-[calc(100%-267px)] h-[5rem] ${
+      className={`bg-gray-50 fixed top-0 right-0 z-50 w-[calc(100%-150px)] md:w-[calc(100%-160px)] lg:w-[calc(100%-192px)] xl:w-[calc(100%-267px)] h-[5rem] ${
         isScrolled && "backdrop-blur-md backdrop-opacity-10 shadow-md"
       } flex items-center border-b-2 border-slate-200`}
     >

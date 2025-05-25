@@ -6,6 +6,12 @@ import { CategoryProps } from "@/lib/types";
 import ButtonModalAddCategory from "@/components/ButtonModalAddCategory";
 import { getUser } from "@/lib/actions/auth.action";
 import ButtonPagination from "@/components/ButtonPagination";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Dashboard Category",
+  description: "Manage your categories in the Artivo dashboard",
+};
 
 const DashboardCategoryPage = async ({ searchParams }: { searchParams: Promise<{ query?: string; page?: string }> }) => {
   const { query, page } = await searchParams;
@@ -27,13 +33,11 @@ const DashboardCategoryPage = async ({ searchParams }: { searchParams: Promise<{
     categories = categories.filter((category) => category.name.toLowerCase().includes(query.toLowerCase()));
   }
 
-  // console.log({ query, categories }, "<---dashboardCategoryPage");
-
   return (
-    <main className="b-fuchsia-500 min-h-screen pt-[100px] p-6">
-      <div className="b-amber-500">
+    <main className="min-h-screen pt-[100px] p-6">
+      <div>
         {/* Top */}
-        <div className="b-rose-500 rounded-t-md overflow-hidden">
+        <div className="rounded-t-md overflow-hidden">
           {/* Total Category */}
           <div className="bg-white p-6 border-b-2 border-slate-200">
             <span>Total Category: {categoriesLength}</span>
@@ -52,7 +56,7 @@ const DashboardCategoryPage = async ({ searchParams }: { searchParams: Promise<{
         </div>
 
         {/* Table */}
-        <div className="b-rose-600">
+        <div>
           <CategoryTable categories={categories} user={user} />
         </div>
 

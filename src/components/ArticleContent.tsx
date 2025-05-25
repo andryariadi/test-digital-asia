@@ -29,14 +29,12 @@ const ArticleContent = ({
   onAddArticle: () => void;
   onEditArticle: (id: string) => void;
 }) => {
-  console.log(onAddArticle, "<---onAddArticle");
-
   const showPagination = isPagination && articlesLength > 10;
 
   return (
-    <section className="b-amber-500">
+    <section>
       {/* Top */}
-      <div className="b-rose-500 rounded-t-md overflow-hidden">
+      <div className="rounded-t-md overflow-hidden">
         {/* Total Articles */}
         <div className="bg-white p-6 border-b-2 border-slate-200">
           <span>Total Articles: {articlesLength}</span>
@@ -45,7 +43,7 @@ const ArticleContent = ({
         {/* Action Button */}
         <div className="bg-white p-6 flex items-center justify-between border-b-2 border-slate-200">
           {/* Filter & Search */}
-          <div className="b-rose-600 flex items-center gap-2">
+          <div className="flex items-center gap-2">
             <FilterCategory caategories={categories} isAdmin={true} />
 
             <SearchArticles query={query} action="/dashboard-articles" isAdmin={true} isArticle={true} />
@@ -64,7 +62,7 @@ const ArticleContent = ({
       </div>
 
       {/* Table */}
-      <div className="b-sky-600">
+      <div>
         <ArticlesTable articles={articles} onEditArticle={onEditArticle} />
       </div>
 

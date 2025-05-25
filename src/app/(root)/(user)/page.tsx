@@ -31,21 +31,8 @@ export default async function ArticlesHomePage({ searchParams }: { searchParams:
     articles = res.data || [];
   }
 
-  // articles = articles.filter((article) => {
-  //   const matchesQuery = query
-  //     ? article.title.toLowerCase().includes(query.toLowerCase()) || (article.content && article.content.toLowerCase().includes(query.toLowerCase())) || article.category.name.toLowerCase().includes(query.toLowerCase())
-  //     : true;
-
-  //   const matchesCategory = category ? article.category.name.toLowerCase() === category.toLowerCase() : true;
-
-  //   return matchesQuery && matchesCategory;
-  // });
-
-  // console.log({ res, articles }, "<---homePage");
-  console.log({ query, category }, "<---homePage");
-
   return (
-    <main className="b-amber-500 min-h-[calc(100vh-4.5rem)] space-y-10">
+    <main className="min-h-[calc(100vh-4.5rem)] space-y-10">
       <HeroSection query={query} />
       <ArticleLists articles={articles} articlesLength={articlesLength} currentPage={currentPage} totalPages={totalPages} />
     </main>

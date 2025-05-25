@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { Suspense } from "react";
 import { CategoryProps, UserProps } from "@/lib/types";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { formatDatee } from "@/lib/utils";
@@ -8,8 +8,6 @@ import ButtonModalEditCategory from "./ButtonModalEditCategory";
 import ButtonModalDeleteCategory from "./ButtonModalDeleteCategory";
 
 const CategoryTable = ({ categories, user }: { categories: CategoryProps[]; user: UserProps }) => {
-  console.log({ categories }, "<---CategoryTable");
-
   return (
     <Table>
       <TableHeader>
@@ -23,23 +21,25 @@ const CategoryTable = ({ categories, user }: { categories: CategoryProps[]; user
       </TableHeader>
 
       <TableBody className="bg-white">
-        {categories.map((category) => (
-          <TableRow key={category.id} className="h-24">
-            <TableCell className="text-center w-[375px] text-sm font-normal text-slate-600">{category.name}</TableCell>
+        <Suspense fallback={<h1 className="text-xl font-semibold text-sky-500">Loading...</h1>}>
+          {categories.map((category) => (
+            <TableRow key={category.id} className="h-24">
+              <TableCell className="text-center w-[375px] text-sm font-normal text-slate-600">{category.name}</TableCell>
 
-            <TableCell className="text-center w-[375px] text-sm font-normal text-slate-600">{formatDatee(category.createdAt)}</TableCell>
+              <TableCell className="text-center w-[375px] text-sm font-normal text-slate-600">{formatDatee(category.createdAt)}</TableCell>
 
-            <TableCell className="text-center w-[375px] text-sm font-normal text-slate-600">
-              <div className="flex items-center justify-center gap-3">
-                {/* Modal Edit */}
-                <ButtonModalEditCategory user={user} category={category} />
+              <TableCell className="text-center w-[375px] text-sm font-normal text-slate-600">
+                <div className="flex items-center justify-center gap-3">
+                  {/* Modal Edit */}
+                  <ButtonModalEditCategory user={user} category={category} />
 
-                {/* Modal Delete */}
-                <ButtonModalDeleteCategory category={category} />
-              </div>
-            </TableCell>
-          </TableRow>
-        ))}
+                  {/* Modal Delete */}
+                  <ButtonModalDeleteCategory category={category} />
+                </div>
+              </TableCell>
+            </TableRow>
+          ))}
+        </Suspense>
       </TableBody>
     </Table>
   );

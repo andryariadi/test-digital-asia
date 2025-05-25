@@ -51,7 +51,7 @@ const ButtonPagination = ({ currentPage, totalPages }: { currentPage: number; to
   };
 
   return (
-    <section className="b-amber-600 flex items-center justify-center">
+    <section className="flex items-center justify-center">
       <Pagination>
         <PaginationContent>
           <PaginationItem>

@@ -52,8 +52,6 @@ const ArticleForm = ({ onCancel, user, categories, articleId }: { onCancel: () =
         try {
           const article = await getArticle(articleId);
 
-          console.log({ article }, "<---fetchArticle");
-
           if (article) {
             setValue("title", article.title);
             setValue("category", article.category.name);
@@ -140,7 +138,6 @@ const ArticleForm = ({ onCancel, user, categories, articleId }: { onCancel: () =
 
       if (isEditing && articleId) {
         const res = await updateArticle(articleId, articleData);
-        console.log({ res }, "<---updateArticle");
 
         if (res) {
           toast.success("Article updated successfully", {
@@ -149,7 +146,6 @@ const ArticleForm = ({ onCancel, user, categories, articleId }: { onCancel: () =
         }
       } else {
         const res = await createArticle(articleData);
-        console.log({ res }, "<---createArticle");
 
         if (res) {
           toast.success("Article created successfully", {
@@ -188,7 +184,11 @@ const ArticleForm = ({ onCancel, user, categories, articleId }: { onCancel: () =
           {/* Title & Category */}
           <div className="space-y-1 text-center">
             <h1 className="text-2xl font-bold capitalize">{previewData?.title}</h1>
-            <span className="text-sm text-gray-500">{previewData?.category}</span>
+
+            <div className="flex justify-center items-center gap-2">
+              <span className="text-sm text-gray-500">{previewData?.category}</span>
+              <span className="text-sm text-gray-500">{user.username}</span>
+            </div>
           </div>
 
           {/* Image */}
@@ -218,7 +218,7 @@ const ArticleForm = ({ onCancel, user, categories, articleId }: { onCancel: () =
             </div>
           </div>
 
-          <form onSubmit={handleSubmit(handleSubmitArticle)} className="b-sky-700 space-y-7">
+          <form onSubmit={handleSubmit(handleSubmitArticle)} className="space-y-7">
             <div className="relative flex flex-col gap-2">
               <span className="font-semibold text-gray-700">Thumbnails</span>
               <input type="file" id="image" className="sr-only" accept="image/jpeg, image/png" onChange={handleImageChange} />

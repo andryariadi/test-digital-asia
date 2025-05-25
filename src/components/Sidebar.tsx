@@ -19,7 +19,7 @@ const Sidebar = () => {
       </Link>
 
       {/* Menu Links */}
-      <aside className="b-rose-500 space-y-3">
+      <aside className="space-y-3">
         {sidebarLinks.map((link) => {
           const isActive = pathname === link.route || pathname.startsWith(`${link.route}/`);
 

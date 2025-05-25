@@ -44,3 +44,14 @@ export const stripHtmlTags = (html: string) => {
     return doc.body.textContent || "";
   }
 };
+
+export function formatRouteName(route: string): string {
+  // Hapus slash di awal dan akhir
+  const cleaned = route.replace(/^\/|\/$/g, "");
+
+  // Ubah dash/tanda hubung menjadi spasi
+  const withSpaces = cleaned.replace(/-/g, " ");
+
+  // Kapitalisasi setiap kata
+  return withSpaces.replace(/\b\w/g, (char) => char.toUpperCase());
+}

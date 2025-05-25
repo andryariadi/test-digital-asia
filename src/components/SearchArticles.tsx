@@ -18,11 +18,9 @@ const SearchArticles = ({
   isCategory?: boolean;
   placeholder?: string;
 }) => {
-  console.log({ query }, "<---searchArticles");
-
   return (
-    <Form action={action} scroll={false} className="b-amber-500 group relative search w-full flex items-center justify-center">
-      <div className="b-violet-500 relative w-full max-w-2xl">
+    <Form action={action} scroll={false} className="group relative search w-full flex items-center justify-center">
+      <div className="relative w-full max-w-2xl">
         <input
           type="text"
           name="query"

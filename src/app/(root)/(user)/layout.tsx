@@ -9,7 +9,7 @@ export default async function UserLayout({
 }>) {
   const user = await getUser();
 
-  console.log({ user }, "<---userLayout");
+  // console.log({ user }, "<---userLayout");
   return (
     <>
       <Navbar user={user} />

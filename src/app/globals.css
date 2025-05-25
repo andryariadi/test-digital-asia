@@ -123,6 +123,6 @@
 
 @layer utilities {
   .left_sidebar {
-    @apply sticky right-0 top-0 flex flex-col text-gray-300/90 max-md:hidden min-h-screen;
+    @apply fixed left-0 top-0 z-50 flex flex-col text-gray-300/90 max-md:hidden min-h-screen;
   }
 }

@@ -1,4 +1,3 @@
-// app/components/ArticleViewSwitcher.tsx
 "use client";
 
 import React, { useState } from "react";
@@ -8,7 +7,7 @@ import { ArticleProps, CategoryProps, UserProps } from "@/lib/types";
 
 const ArticleViewSwitcher = ({
   initialUser,
-  initialCategories,
+  initialCategoriesForSelect,
   initialArticles,
   initialArticlesLength,
   initialQuery,
@@ -16,7 +15,7 @@ const ArticleViewSwitcher = ({
   totalPages,
 }: {
   initialUser: UserProps;
-  initialCategories: CategoryProps[];
+  initialCategoriesForSelect: CategoryProps[];
   initialArticles: ArticleProps[];
   initialArticlesLength: number;
   initialQuery?: string;
@@ -36,12 +35,12 @@ const ArticleViewSwitcher = ({
           }}
           articleId={articleId}
           user={initialUser}
-          categories={initialCategories}
+          categories={initialCategoriesForSelect}
         />
       ) : (
         <ArticleContent
           articles={initialArticles}
-          categories={initialCategories}
+          categories={initialCategoriesForSelect}
           articlesLength={initialArticlesLength}
           query={initialQuery}
           currentPage={currentPage}

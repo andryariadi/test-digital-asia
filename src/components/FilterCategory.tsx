@@ -23,8 +23,6 @@ const FilterCategory = ({ caategories, isAdmin = false }: { caategories: Categor
     router.push(`?${params.toString()}`);
   };
 
-  console.log({ caategories }, "<---filterCategory");
-
   return (
     <div className="w-full md:max-w-[180px]">
       <Select value={selectedCategory} onValueChange={handleChange}>

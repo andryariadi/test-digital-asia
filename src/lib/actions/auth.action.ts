@@ -13,8 +13,6 @@ export const singup = async (data: z.infer<typeof RegisterFormValidation>) => {
   try {
     const res = await axios.post(`${BASE_URL}/auth/register`, data);
 
-    console.log(res, "<---singupAction2");
-
     return {
       user: res.data,
       message: "Registration successful",
@@ -39,8 +37,6 @@ export const login = async (data: z.infer<typeof LoginFormValidation>) => {
     const cookieStore = await cookies();
 
     const res = await axios.post(`${BASE_URL}/auth/login`, data);
-
-    console.log(res, "<---loginAction2");
 
     if (res.data.token) {
       cookieStore.set({
@@ -87,8 +83,6 @@ export const logout = async () => {
   try {
     const cookieStore = await cookies();
 
-    console.log({ cookieStore }, "<---logoutAction");
-
     cookieStore.delete("accessToken");
     cookieStore.delete("role");
 
@@ -114,8 +108,6 @@ export const getUser = async () => {
 
     const token = cookieStore.get("accessToken")?.value;
 
-    // console.log({ token }, "<---getUserAction");
-
     if (!token) {
       throw new Error("No token found");
     }
@@ -125,8 +117,6 @@ export const getUser = async () => {
         Authorization: `Bearer ${token}`,
       },
     });
-
-    // console.log({ data: res.data }, "<---getUserAction2");
 
     return res.data;
   } catch (error: unknown) {
