@@ -24,7 +24,7 @@ const ArticleLists = ({
   const showPagination = isPagination && articlesLength > 10;
 
   return (
-    <section className={cn(`${isLength ? "px-4 md:px-10 lg:px-20 xl:px-32" : "px-0"} ${isPagination ? "pb-40" : "pb-32"} flex flex-col justify-start gap-5`)}>
+    <section className={cn(`${isLength ? "px-4 md:px-10 lg:px-20 xl:px-32" : "px-0"} ${isPagination ? "pb-20" : "pb-0"} flex flex-col justify-start gap-5`)}>
       {/* Article length */}
       {isLength ? (
         <Suspense fallback={<h1 className="text-xl font-semibold text-sky-500">Loading...</h1>}>
